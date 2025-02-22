@@ -1,12 +1,9 @@
+version: "3.8"
 
 services:
-  bot:
+  btc-bot:
     build: .
-    container_name: binance_bot2
-    environment:
-      - PYTHONPATH=/app
-    volumes:
-      - ./logs:/app/logs
+    container_name: btc-bot
+    env_file:
+      - .env
     restart: always
-    command: python app/trading_bot.py
-

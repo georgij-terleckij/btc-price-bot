@@ -1,13 +1,18 @@
-FROM python:3.9-slim
+# Используем Python 3.9
+FROM python:3.9
 
+# Устанавливаем рабочую директорию
 WORKDIR /app
-COPY . /app
-# Copy requirements and install dependencies
-# COPY requirements.txt .
+
+# Копируем файлы проекта
+COPY app/ /app/
+COPY requirements.txt /app/
+
+# Устанавливаем зависимости
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the application
-# COPY . .
+# Загружаем переменные окружения
+ENV PYTHONUNBUFFERED=1
 
-# Run the bot
-CMD ["python", "app/bot.py"]
+# Запускаем бота
+CMD ["python", "bot.py"]
