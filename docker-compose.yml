@@ -1,0 +1,12 @@
+
+services:
+  bot:
+    build: .
+    container_name: binance_bot2
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - ./logs:/app/logs
+    restart: always
+    command: python app/trading_bot.py
+
