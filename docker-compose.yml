@@ -1,9 +1,22 @@
-version: "3.8"
+version: '3.9'
 
 services:
-  btc-bot:
-    build: .
-    container_name: btc-bot
-    env_file:
-      - .env
-    restart: always
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  trading-service:
+    build:
+      context: ./trading-service
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq
+
+  telegram-bot-service:
+    build:
+      context: ./telegram-bot-service
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq

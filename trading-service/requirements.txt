@@ -1,0 +1,3 @@
+python-binance
+aio-pika
+asyncio

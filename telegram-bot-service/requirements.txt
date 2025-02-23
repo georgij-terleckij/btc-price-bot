@@ -1,0 +1,5 @@
+pyTelegramBotAPI
+aio-pika
+aiohttp
+asyncio
+aio_pika
