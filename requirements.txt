@@ -1,4 +1,0 @@
-python-binance
-pyTelegramBotAPI
-python-dotenv
-asyncio
