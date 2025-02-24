@@ -2,9 +2,9 @@ import asyncio
 import aio_pika
 from telebot.async_telebot import AsyncTeleBot
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
+from config import TELEGRAM_TOKEN
 
 
-TELEGRAM_TOKEN="877614509:AAGiL1z2xO7qFK88I8j3ZceVdfBRL7dHUiQ"
 bot = AsyncTeleBot(TELEGRAM_TOKEN)
 
 keyboard = ReplyKeyboardMarkup(resize_keyboard=True)

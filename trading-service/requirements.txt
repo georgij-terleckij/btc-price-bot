@@ -1,3 +1,4 @@
 python-binance
 aio-pika
 asyncio
+python-dotenv

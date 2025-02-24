@@ -2,11 +2,16 @@ import asyncio
 import aio_pika
 from binance import BinanceSocketManager, AsyncClient
 from config import API_KEY, API_SECRET
+import os
+
+
+# RABBITMQ_HOST = os.getenv("RABBITMQ_HOST", "btc-price-bot-rabbitmq-1")  # ✅ ИСПОЛЬЗУЕМ НАЗВАНИЕ КОНТЕЙНЕРА
+RABBITMQ_HOST = "btc-price-bot-rabbitmq-1"  # ✅ ИСПОЛЬЗУЕМ НАЗВАНИЕ КОНТЕЙНЕРА
 
 
 async def connect_rabbitmq():
     """Подключается к RabbitMQ"""
-    connection = await aio_pika.connect_robust("amqp://guest:guest@rabbitmq/")
+    connection = await aio_pika.connect_robust(f"amqp://guest:guest@{RABBITMQ_HOST}/")
     channel = await connection.channel()
     return channel
 

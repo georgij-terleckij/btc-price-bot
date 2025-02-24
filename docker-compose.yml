@@ -3,20 +3,43 @@ version: '3.9'
 services:
   rabbitmq:
     image: rabbitmq:management
+    container_name: btc-price-bot-rabbitmq-1
     ports:
       - "5672:5672"
       - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - app_network
 
   trading-service:
     build:
       context: ./trading-service
       dockerfile: Dockerfile
+    container_name: trading-service-1
     depends_on:
       - rabbitmq
+    env_file:
+      - .env
+    networks:
+      - app_network
+    restart: always
+
 
   telegram-bot-service:
     build:
       context: ./telegram-bot-service
       dockerfile: Dockerfile
+    container_name: btc-price-bot-telegram-bot-service-1
     depends_on:
       - rabbitmq
+    env_file:
+      - .env
+    networks:
+      - app_network  # ✅ Подключаем к той же сети (БЫЛО ОШИБКОЙ!)
+    restart: always
+
+networks:
+  app_network:
+    driver: bridge
